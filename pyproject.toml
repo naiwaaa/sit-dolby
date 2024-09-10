@@ -1,0 +1,54 @@
+[project]
+name = "sit-dolby"
+description = "Occupancy and Flow"
+readme = "README.md"
+license = { file = "LICENSE.md" }
+dynamic = ["version"]
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.1.0",
+    "matplotlib>=3.9.2",
+    "scikit-learn>=1.5.1",
+    "scipy>=1.14.1",
+    "polars[numpy,plot,pydantic,style]>=1.5.0",
+    "pillow>=10.4.0",
+    "graphviz>=0.20.3",
+    "pydot>=3.0.1",
+    "wandb>=0.17.7",
+    "pydantic>=2.8.2",
+    "rich[jupyter]>=13.7.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/sit_dolby/__init__.py"
+
+[tool.uv]
+extra-index-url = ["https://download.pytorch.org/whl/cu124"]
+dev-dependencies = [
+    "pdoc",
+    "pre-commit",
+    # jupyter
+    "jupyterlab",
+    "jupytext",
+    # linters
+    "ruff",
+    "pylint",
+    # test
+    "pytest",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-xdist[psutil]",
+    "pytest-clarity",
+    "pytest-randomly",
+    "pytest-benchmark",
+    "hypothesis",
+    # typing
+    "mypy",
+]
+
+[project.scripts]
+cli = "sit_dolby:main"
