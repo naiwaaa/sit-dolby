@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from py_project.utils.console import console
+from sit_dolby.utils.console import console
 
 
 __all__ = [

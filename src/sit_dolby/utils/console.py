@@ -17,20 +17,21 @@ from rich.progress import (
 
 
 if TYPE_CHECKING:
+    from typing import Self
+
     from collections.abc import Mapping, Iterable
 
-    from rich.progress import ProgressType
+    from rich.progress import ProgressType, ProgressColumn
 
 
 class CustomConsole(Console):
     def track(
-        self,
+        self: Self,
         sequence: Iterable[ProgressType],
         description: str = "Working...",
         total: int | None = None,
-        transient: bool = False,
     ) -> Iterable[ProgressType]:
-        columns = [
+        columns: list[ProgressColumn] = [
             SpinnerColumn(),
             TextColumn("[progress.description]{task.description}"),
             BarColumn(),
@@ -46,14 +47,13 @@ class CustomConsole(Console):
         progress = Progress(
             *columns,
             console=self,
-            transient=transient,
         )
 
         with progress:
             yield from progress.track(sequence, total=total, description=description)
 
     def print_table(
-        self,
+        self: Self,
         title: str,
         columns: list[str],
         rows: list[list[str]],
@@ -68,10 +68,10 @@ class CustomConsole(Console):
 
         self.print(Align.center(table))
 
-    def print_dict(self, data: Mapping[str, str | float | int]) -> None:
+    def print_dict(self: Self, data: Mapping[str, str | float | int]) -> None:
         self.print(Pretty(data))
 
-    def print_divider(self, title: str) -> None:
+    def print_divider(self: Self, title: str) -> None:
         self.print()
         self.print()
         self.rule(title)
